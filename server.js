@@ -1,10 +1,18 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
+require('./server/db/config/index');
+
+const birthdayRouter = require('./server/routes/birthdays');
 
 const express = require('express');
 const path = require('path');
 const app = express();
+
+app.use(express.json())
+app.use("/", birthdayRouter);
+
+
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
